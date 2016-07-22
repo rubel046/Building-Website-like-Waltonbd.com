@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Message</title>
+		<link rel="shortcut icon" href="images/favicon.png">
+		<link href="css/style_new.css" rel="stylesheet" type="text/css"/>
+	</head>
+	
+	<body>
+		<div class="main">
+			<?php 
+			include 'walton_header.php';
+			?>
+				
+				<div class="breadcrumb">
+					<a href="index.php">Home </a>&raquo;
+					<a href="index_message.php">Message</a>
+				</div>
+				
+				<div class="page-header">
+					<h1>Message</h1>
+				</div>
+				<div id="message">
+					<?php 	
+					    // mysql_connect('localhost','root','') or die(mysql_error());
+	     			//     mysql_select_db("walton_database" );
+	     			include 'connect_database.php';
+	     				$query = "SELECT * FROM message";
+	     				$result = mysql_query($query);
+	     				while($row = mysql_fetch_array($result))
+	     				   {
+	     			        
+		     				  echo $row['description'];
+		     				  echo "<br/>"."<br/>";
+
+	     					}
+	     			?>
+
+				</div>
+
+		</div>
+		
+			<?php 
+				include 'walton_footer.php';
+			?>
+		</div>
+		 
+	</body>
+</html>

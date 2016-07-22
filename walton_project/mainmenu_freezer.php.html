@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Refrigerator</title>
+		<link rel="shortcut icon" href="images/favicon.png">
+		<link href="css/style_new.css" rel="stylesheet" type="text/css"/>
+	</head>
+	
+	<body>
+		<div class="main">
+			<?php 
+			include 'walton_header.php';
+			?>
+				
+				<div class="breadcrumb">
+					<a href="index.php">Home </a>&raquo;
+					<a href="mainmenu_refrigerator_freezer.php">Refrigerator & Freezer</a>&raquo;
+					<a href="mainmenu_freezer.php">Freezer</a>
+				</div>
+				
+				<div class="page-header">
+					<h1>
+						Refrigerator
+					</h1>
+				</div>
+				<div id="refrigerator">
+
+				<?php 	
+
+					// mysql_connect('localhost','root','') or die(mysql_error());
+     // 			    mysql_select_db("walton_database" );
+				include 'connect_database.php';
+
+     				$query = "SELECT * FROM post_product  where subcategory= 'Freezer' ORDER BY id DESC";
+
+     				$result = mysql_query($query);
+
+     				//$oddEven=0;
+     				while($row = mysql_fetch_array($result))
+     				   {
+     						$row1=$row['id'];
+							echo"<div id='side'>";
+							echo "<a href='refrigerator_view.php?ID=$row1'>".'<img src="data:image/jpeg;base64,' . base64_encode($row['gallary_picture']) . '" width="130" height="200">'."</a>";
+							echo "<br/>";
+							echo "Model: ".$row['model'];
+							echo "<br/>";
+							echo "Price (Tk): ".$row['price'];
+							echo"</div>";	
+     			    
+     					}
+
+				?>
+
+			</div>
+		</div>
+				
+			<?php 
+			include 'walton_footer.php';
+			?>
+	</body>
+</html>

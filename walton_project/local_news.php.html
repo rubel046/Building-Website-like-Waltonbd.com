@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Local News</title>
+		<link rel="shortcut icon" href="images/favicon.png">
+		<link href="css/style_new.css" rel="stylesheet" type="text/css"/>
+	</head>
+	
+	<body>
+		<div class="main">
+			<?php 
+			include 'walton_header.php';
+			?>
+
+			<?php
+
+                   $ID = $_GET['ID'];
+                   $key= $_GET['key'];
+           //         mysql_connect('localhost','root','') or die(mysql_error());
+     			   // mysql_select_db("walton_database" );
+     			   include 'connect_database.php';
+
+                   if($key==1)
+                   {
+
+					
+     				$query = "SELECT * FROM bangla_news where id= $ID";
+     			}
+
+     			else
+     			{
+     				$query = "SELECT * FROM news where id= $ID";
+     			}
+     				$result = mysql_query($query);
+
+     				while($row = mysql_fetch_array($result))
+     				   {
+
+						echo "<div class='breadcrumb'>";
+							echo "<a href='index.php'>"."Home". "</a>"." ".'&raquo'." ";
+							echo "<a href=''>".$row['category']."</a>"." ".'&raquo'." ";
+							echo "<td>". "<a href=''>".$row['title']."</a>"."</td>";
+						echo "</div>";
+
+						echo "<div id='local'>";
+					    	echo "<div id='image_show'>";
+     			     			echo "<td>".'<img src="data:image/jpeg;base64,' . base64_encode($row['image']) . '" width="720" height="400">'."</td>";
+     			     		echo "</div>";
+     			     		echo "<div id='content_show'>";
+     			     			echo "<td>".$row['description']."</td>";
+     			     		echo "</div>";
+
+						echo "</div>";
+
+						}
+		?>
+
+			</div>
+
+			
+		</div>
+
+		<?php 
+		include 'walton_footer.php';
+		?>
+	</body>
+</html>
+

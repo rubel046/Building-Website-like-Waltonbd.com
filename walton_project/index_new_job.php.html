@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>New Jobs</title>
+		<link rel="shortcut icon" href="images/favicon.png">
+		<link  rel="stylesheet" type="text/css" href="css/style_new.css"/>
+	</head>
+	
+	<body>
+		<div class="main">
+			<?php 
+			include 'walton_header.php';
+			?>
+				
+				<div class="breadcrumb">
+					<a href="index.php">Home </a>&raquo;
+					<a href="index_new_job.php">New Jobs</a>
+				</div>
+
+			<div id="content">
+				<table>
+
+				<?php 	
+				    // mysql_connect('localhost','root','') or die(mysql_error());
+     			//     mysql_select_db("walton_database" );
+     			include 'connect_database.php';
+
+     				$query = "SELECT * FROM career";
+     				$result = mysql_query($query);
+     				while($row = mysql_fetch_array($result))
+     				   {
+       						$row1=$row['id'];
+		     			     echo "<td >";
+		     			     echo "<tr >"."<a href='view_career.php?ID=$row1'>"."<h3 class='border'>".$row['title']."</h3>"."</a>"."</tr>"."<br/>";
+		     				 echo "<h4>"."Job Description / Responsibility"."</h4>";
+		     				 echo "<ul>"."<li>".$row['description']."</li>"."</ul>"."<br/>";
+		     				 echo "<a href='view_career.php?ID=$row1'>"."read more"."</a>"."</tr>"."<br/>"."<br/>";
+		     				 echo "</td>"; 
+	     				}
+	     		?>
+               </table>
+
+			</div>
+		</div>		
+		
+		<?php 
+			include 'walton_footer.php';
+		?>
+		</div>
+	
+	</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Welcome To Admin Panel</title>
+		<link rel="shortcut icon" href="resource/icon.ico"/>
+		<link  type="text/css" rel="stylesheet" href="css/style.css"/>
+	</head>
+
+	<body>
+<?php
+
+$messErr ="";
+$name = $password ="";
+// $connection = mysql_connect('localhost','root','');
+include 'connect_database.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+$name = test_input($_POST["name"]);
+$password = test_input($_POST["password"]);
+// $db_slect = mysql_select_db("walton_database",$connection );
+$query = "SELECT * FROM walton_admin WHERE name = '$name' AND password = '$password'";
+
+$result = mysql_query($query);
+$count = mysql_num_rows($result);
+if($count==1)
+ {
+    session_start();
+	$_SESSION['password']=$password;
+    $_SESSION['username']=$name;
+	header ("Location: dashboard.php");
+ }
+else
+ {
+   
+	$messErr ="Invalid Username or Password";	
+ }
+}
+
+function test_input($data) {
+   $data = trim($data);
+   $data = stripslashes($data);
+   $data = htmlspecialchars($data);
+   return $data;
+}
+
+?>	
+	
+		<div id="main_login">
+			<div id="main_content">
+				<div id="admin"><h1>Admin Area</h1>
+				</div>
+			
+				<div class="lg-container">	
+					<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  method="post" >
+						<div>
+							<label for="username">Username:</label>
+							<input type="text" name="name" placeholder="username"/>
+					
+						</div>
+						<div>
+							<label for="password">Password:</label>
+							<input type="password" name="password" placeholder="password" />
+
+						</div>
+						<div id="button">				
+							<button type="submit" value=" login" >Login</button>
+						</div>
+						
+						
+					</form>
+				</div>
+				<div id="message">
+                <span class="error"><?php echo  $messErr; ?></span>
+				</div>
+			 			 
+		</div>
+	</div>
+
+</body>
+</html>	

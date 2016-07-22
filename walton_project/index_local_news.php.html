@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Local News</title>
+		<link rel="shortcut icon" href="images/favicon.png">
+		<link href="css/style_new.css" rel="stylesheet" type="text/css"/>
+	</head>
+	
+	<body>
+		<div class="main">
+			<?php 
+			include 'walton_header.php';
+			?>
+				
+				<div class="breadcrumb">
+					<a href="index.php">Home </a>&raquo;
+					<a href="index_local_news.php">Local News</a>
+					<div id="select_font">
+						<form action="" method="POST">
+							<input type="submit" name="bangla" value="For Bangla"/>
+							<input type="submit" name="english" value="For English"/>
+						</form>
+					</div>
+				</div>
+
+				<div id="local_news">
+					<div id="left">
+
+		                <table>
+						<?php 	
+
+							if ($valu=isset($_POST['bangla'])) 
+								{
+									// mysql_connect('localhost','root','') or die(mysql_error());
+				     // 			    mysql_select_db("walton_database" );
+									include 'connect_database.php';
+				     				$query = "SELECT * FROM bangla_news where category= 'Local News'";
+				     				$result = mysql_query($query);
+
+				     				$oddEven=0;
+				     				while($row = mysql_fetch_array($result))
+			     				   		{
+			     			    
+					     			     if($oddEven%2==0)
+					     					{
+					     						$row1=$row['id'];
+					     						echo "<tr >";
+					     			    		echo "<td>". "<a href='local_news.php?ID=$row1 & key=$valu'>"."<h2 class='border'>".$row['title']."</h2>"."</a>"."</td>";
+												echo"<table cellspacing= 13>";
+					     			     		echo "<tr >";
+					     			     		echo "<td>".'<img src="data:image/jpeg;base64,' . base64_encode($row['image']) . '" width="120" height="90">'."</td>";
+					     			     		echo "<td>".getExcerpt_bangla($row['description'])."</td>";
+					     			      		echo "</tr>";
+					     			            echo"</table>";
+					     			            echo "<td>"."<p>"."<a href='local_news.php?ID=$row1 & key=$valu'>"."Read More"."</a>"."</p>"."<td>"."<br/>";
+												echo "</tr>";        
+			     			    
+			     							}
+			     							$oddEven++;
+			     			
+			     						}
+
+								}
+
+							else
+								{
+				            //         mysql_connect('localhost','root','') or die(mysql_error());
+				     			    // mysql_select_db("walton_database" );
+				     			    include 'connect_database.php';
+				     				$query = "SELECT * FROM news where category= 'Local News'";
+				     				$result = mysql_query($query);
+				     				$valu='2';
+
+				     				$oddEven=0;
+				     				while($row = mysql_fetch_array($result))
+				     				   {
+				     			    
+					     			     if($oddEven%2==0)
+					     					{
+					     						$row1=$row['id'];
+					     						echo "<tr >";
+					     			    		echo "<td>". "<a href='local_news.php?ID=$row1 & key=$valu'>"."<h2 class='border'>".$row['title']."</h2>"."</a>"."</td>";
+												echo"<table cellspacing= 13>";
+					     			     		echo "<tr >";
+					     			     		echo "<td>".'<img src="data:image/jpeg;base64,' . base64_encode($row['image']) . '" width="120" height="90">'."</td>";
+					     			     		echo "<td>".getExcerpt_english($row['description'])."</td>";
+					     			      		echo "</tr>";
+					     			            echo"</table>";
+					     			            echo "<td>"."<p>"."<a href='local_news.php?ID=$row1 & key=$valu'>"."Read More"."</a>"."</p>"."<td>"."<br/>";
+												echo "</tr>";        
+
+					     					}
+
+				     						$oddEven++;
+
+				     					}
+				     			}
+			     		   ?>
+		               </table>
+          			</div>
+
+
+		           <div id="right">
+
+		         		<table>
+						<?php 	
+
+							if ($valu=isset($_POST['bangla'])) 
+								{
+									// mysql_connect('localhost','root','') or die(mysql_error());
+				     // 			    mysql_select_db("walton_database" );
+									include 'connect_database.php';
+				     				$query = "SELECT * FROM bangla_news where category= 'Local News'";
+				     				$result = mysql_query($query);
+
+				     				$oddEven=0;
+				     				while($row = mysql_fetch_array($result))
+				     				   {
+				     			    
+				     			     		if($oddEven%2!=0)
+				     							{
+						     						$row1=$row['id'];
+						     						echo "<tr >";
+						     			    		echo "<td>". "<a href='local_news.php?ID=$row1 & key=$valu '>"."<h2 class='border'>".$row['title']."</h2>"."</a>"."</td>";
+													echo"<table cellspacing= 13>";
+						     			     		echo "<tr >";
+						     			     		echo "<td>".'<img src="data:image/jpeg;base64,' . base64_encode($row['image']) . '" width="120" height="90">'."</td>";
+						     			     		echo "<td>".getExcerpt_bangla($row['description'])."</td>";
+						     			      		echo "</tr>";
+						     			            echo"</table>";
+						     			            echo "<td>"."<p>"."<a href='local_news.php?ID=$row1 & key=$valu'>"."Read More"."</a>"."</p>"."<td>"."<br/>";
+													echo "</tr>";        
+				     			    
+			     								}
+
+			     								$oddEven++;
+
+			     						}
+
+								}
+
+							else
+								{
+
+				            //         mysql_connect('localhost','root','') or die(mysql_error());
+				     			    // mysql_select_db("walton_database" );
+				     			    include 'connect_database.php';
+				     				$query = "SELECT * FROM news where category= 'Local News'";
+				     				$result = mysql_query($query);
+				     				$valu='2';
+
+				     				$oddEven=0;
+				     				while($row = mysql_fetch_array($result))
+				     				   {
+		     			    
+					     			     if($oddEven%2!=0)
+					     					{
+					     						$row1=$row['id'];
+					     						echo "<tr >";
+					     			    		echo "<td>". "<a href='local_news.php?ID=$row1 & key=$valu'>"."<h2 class='border'>".$row['title']."</h2>"."</a>"."</td>";
+												echo"<table cellspacing= 13>";
+					     			     		echo "<tr >";
+					     			     		echo "<td>".'<img src="data:image/jpeg;base64,' . base64_encode($row['image']) . '" width="120" height="90">'."</td>";
+					     			     		echo "<td>".getExcerpt_english($row['description'])."</td>";
+					     			      		echo "</tr>";
+					     			            echo"</table>";
+					     			            echo "<td>"."<p>"."<a href='local_news.php?ID=$row1 & key=$valu'>"."Read More"."</a>"."</p>"."<td>"."<br/>";
+												echo "</tr>";        
+		     			    
+		     								}
+		     								$oddEven++;
+		     				
+
+		     							}
+		     					}
+		     		    ?>
+		               </table>
+		           </div>
+		    </div>
+
+
+					<?php
+
+					function getExcerpt_english($str, $startPos=0, $maxLength=400) {
+						if(strlen($str) > $maxLength) {
+							$excerpt   = substr($str, $startPos, $maxLength-3);
+							$lastSpace = strrpos($excerpt, ' ');
+							$excerpt   = substr($excerpt, 0, $lastSpace);
+							$excerpt  .= '......';
+						} else {
+							$excerpt = $str;
+						}
+						
+						return $excerpt;
+					}
+
+					function getExcerpt_bangla($str, $startPos=0, $maxLength=1600) {
+						if(strlen($str) > $maxLength) {
+							$excerpt   = substr($str, $startPos, $maxLength-3);
+							$lastSpace = strrpos($excerpt, ' ');
+							$excerpt   = substr($excerpt, 0, $lastSpace);
+							$excerpt  .= '......';
+						} else {
+							$excerpt = $str;
+						}
+						
+						return $excerpt;
+					}
+
+					?>
+
+			
+
+		</div>	
+		
+			<?php 
+				include 'walton_footer.php';
+			?>
+	</body>
+</html>
+

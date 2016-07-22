@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Local News</title>
+		<link rel="shortcut icon" href="images/favicon.png">
+		<link href="css/style_new.css" rel="stylesheet" type="text/css"/>
+	</head>
+	
+	<body>
+		<div class="main">
+			<?php 
+			include 'walton_header.php';
+			?>
+
+			<?php
+
+                   $ID = $_GET['ID'];
+           //         mysql_connect('localhost','root','') or die(mysql_error());
+     			   // mysql_select_db("walton_database" );
+     			   include 'connect_database.php';
+     				$query = "SELECT * FROM career where id= $ID";
+     				$result = mysql_query($query);
+
+     				while($row = mysql_fetch_array($result))
+     				   {
+
+						echo "<div class='breadcrumb'>";
+							echo "<a href='index.php'>"."Home". "</a>"." ".'&raquo'." ";
+							echo "<a href='index_new_job.php'>"."New Jobs"."</a>"." ".'&raquo'." ";
+							echo "<td>". "<a href=''>".$row['title']."</a>"."</td>";
+						echo "</div>";
+
+						echo "<div id='content_job'>";
+					    	echo "<b>"."No. of  Vacancies: "."</b>".$row['vacancie']."<br/><br/>";
+     			     		echo "<b>"."Job Description / Responsibility: "."</b>"."<br/>".$row['description']."<br/><br/>";
+     			     		echo "<b>"."Job Nature: "."</b>".$row['nature']."<br/><br/>";
+     			     		echo "<b>"."Educational Requirements: "."</b><br/>".$row['educational_requirement']."<br/><br/>";
+     			     		echo "<b>"."Experience Requirements: "."</b>".$row['experience_requirements']."<br/>";
+     			     		echo "<b>"."Gender: "."</b>".$row['gender']."<br/><br/>";
+     			     		echo "<b>"."Age: "."</b>".$row['age']."<br/>";
+     			     		echo "<b>"."Job Location: "."</b>".$row['location']."<br/><br/>";
+     			     		echo "<b>"."Salary Range: "."</b>".$row['salary_range']."<br/>";
+     			     		echo "<b>"."Application Deadline :  "."</b>".$row['deadline']."<br/><br/><br/>";
+
+     			     		echo "<div id='cv_sent'>";
+     			     		echo "Send your CV to"."<b>"."jobs@waltonbd.com"."</b>"."<br/>";
+	     			     	echo "<b>"."Special Instruction : "."</b>"."Interested candidates are requested to apply confidently with complete CV along with a cover letter and one recent passport size photo to: Executive Director"."<br/>";
+	     			     	echo "(Policy & HRM) & Please mention the name of the position on the top of the cover letter and envelope)"."<br/><br/>";
+	     			     	echo "<b>"."Applicant must enclose his/her Photograph with CV."."</b>";
+								
+     			     		echo "</div>";
+
+     			     		
+
+						echo "</div>";
+
+						}
+		?>
+
+			</div>
+
+			
+		</div>
+
+		<?php 
+		include 'walton_footer.php';
+		?>
+	</body>
+</html>
+

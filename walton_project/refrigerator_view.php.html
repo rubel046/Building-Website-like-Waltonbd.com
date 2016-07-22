@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Refrigerator</title>
+		<link rel="shortcut icon" href="images/favicon.png">
+		<link href="css/style_new.css" rel="stylesheet" type="text/css"/>
+		<link  type="text/css" rel="stylesheet" href="css/New_Post_Css.css"/>
+	</head>
+	
+	<body>
+		<div class="main">
+			<?php 
+			include 'walton_header.php';
+			?>
+
+
+
+			<?php 
+
+			 $ID = $_GET['ID'];
+
+					// mysql_connect('localhost','root','') or die(mysql_error());
+     // 			     mysql_select_db("walton_database" );
+                include 'connect_database.php';
+
+     				$query = "SELECT * FROM post_product  where id= $ID ";
+
+     				$result = mysql_query($query);
+
+					
+     				while($row = mysql_fetch_array($result))
+
+     				   {
+
+
+     				   	echo "<div class='breadcrumb'>";
+							echo "<a href='index.php'>"."Home"."</a>"." ".'&raquo;'." ";
+							echo "<a href='mainmenu_refrigerator_freezer.php'>"."Refrigerator & Freezer"."</a>"." ".'&raquo;'." ";
+							echo "<a href='mainmenu_refrigerator.php'>"."Refrigerator"."</a>"." ".'&raquo;'." ";
+							echo "<a href=''>".$row['model']."</a>";
+						echo"</div>";
+
+
+						
+
+						echo"<div id='refrigerator_view'>";
+							echo "<div id='image_view'>";
+     			     			echo '<img src="data:image/jpeg;base64,' . base64_encode($row['gallary_picture']) . '" width="350" height="500">';
+     			     		echo "</div>";
+                                   echo "<div id='fearure_image_view'>";
+                                        echo "<h2>"."Feature :"."</h2>".'<img src="data:image/jpeg;base64,' . base64_encode($row['feature_picture']) . '" width="500" height="1600">';
+                                   echo "</div>";
+
+     			     		echo "<div>";
+                                   echo "<h2>"."Technical Specification :"."</h2>";
+     			     			echo "<table>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Type :"."</td>";
+     			     					echo "<td>".$row['type']."</td>";
+
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Gross Volume (Outer Dimension) :"."</td>";
+     			     					echo "<td>".$row['Gross_Volume_outer']."</td>";
+     			     					
+     			     				echo "</tr>";
+
+     			     				echo "<tr>";
+     			     					echo "<td>"."Gross Volume :"."</td>";
+     			     					echo "<td>".$row['Gross_Volume_outer']."</td>";
+
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Net Volume :"."</td>";
+     			     					echo "<td>".$row['net_volume']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."<b>"."Performance :"."</b>"."</td>";
+     			     					
+
+     			     				echo "</tr>";
+     			     				 
+     			     				echo "<tr>";
+     			     					echo "<td>"."Climatic Type (SN, N, ST, T) :"."</td>";
+     			     					echo "<td>".$row['Climatic_Type']."</td>";
+
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Volt/Hz :"."</td>";
+     			     					echo "<td>".$row['Volt_Hz_watt']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."<b>"."General features :"."</b>"."</td>";
+     			     					
+
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Temperature Control :"."</td>";
+     			     					echo "<td>".$row['Temperature']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Defrosting (Automatic/Manual) :"."</td>";
+     			     					echo "<td>".$row['Defrosting']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Reversible Door :"."</td>";
+     			     					echo "<td>".$row['Reversible_Door']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Handle (Recessed/Grip) :"."</td>";
+     			     					echo "<td>".$row['Handle']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Lock :"."</td>";
+     			     					echo "<td>".$row['Vegetable_Crisper']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Refrigerant :"."</td>";
+     			     					echo "<td>".$row['Refrigerant']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Condenser :"."</td>";
+     			     					echo "<td>".$row['Condenser']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Evaporator :"."</td>";
+     			     					echo "<td>".$row['Evaporator']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Capillary :"."</td>";
+     			     					echo "<td>".$row['Capillary']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Polyurethane foam blowing agent :"."</td>";
+     			     					echo "<td>".$row['Foaming_Chemical']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."<b>"."Refrigerator Compartment :"."</b>"."</td>";
+     			     					
+     			     					
+     			     				echo "</tr>";
+     			     				
+     			     				echo "<tr>";
+     			     					echo "<td>"."Interior Lamp :"."</td>";
+     			     					echo "<td>".$row['Shelf_Material_No1']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Vegetable Crisper :"."</td>";
+     			     					echo "<td>".$row['Vegetable_Crisper']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Vegetable Crisper Cover :"."</td>";
+     			     					echo "<td>".$row['Vegetable_Crisper_Cover']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Egg Tray or Pocket :"."</td>";
+     			     					echo "<td>".$row['Egg_Tray_or_Pocket']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Can Storage Dispenser :"."</td>";
+     			     					echo "<td>".$row['Can_Storage_Dispenser']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Deodorizer:"."</td>";
+     			     					echo "<td>".$row['Egg_Tray_or_Pocket']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."<b>"."Freezer Compartment:"."</b>"."</td>";
+     			     					
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Ice/cold water Dispenser:"."</td>";
+     			     					echo "<td>".$row['Ice_cold_water_Dispenser']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Shelf (Material/No.) :"."</td>";
+     			     					echo "<td>".$row['Shelf_Material_No2']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Drawer :"."</td>";
+     			     					echo "<td>".$row['Drawer']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Door Basket :"."</td>";
+     			     					echo "<td>".$row['Door_Basket']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Interior Lamp :"."</td>";
+     			     					echo "<td>".$row['Interior_Lamp_low']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Cooling Effect :"."</td>";
+     			     					echo "<td>".$row['Cooling_Effect']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."<b>"."Dimensions:"."</b>"."</td>";
+     			     					
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Width/mm  :"."</td>";
+     			     					echo "<td>".$row['Width_mm_Net']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Depth/mm :"."</td>";
+     			     					echo "<td>".$row['Depth_mm_Net']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Height/mm :"."</td>";
+     			     					echo "<td>".$row['Height_mm_Net']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."<b>"."Packing :"."</b>"."</td>";
+     			     					
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Width/mm :"."</td>";
+     			     					echo "<td>".$row['Width_mm_Packing']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Depth/mm :"."</td>";
+     			     					echo "<td>".$row['Depth_mm_Packing']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Height/mm :"."</td>";
+     			     					echo "<td>".$row['Height_mm_Packing']."</td>";
+     			     					
+     			     				echo "</tr>";
+     			     				echo "<tr>";
+     			     					echo "<td>"."Weight/Kg - Net/Packing :"."</td>";
+     			     					echo "<td>".$row['Weight_Kg_Net']."</td>";
+     			     					
+     			     				echo "</tr>";
+
+     			     				
+     			     			echo"</table>";
+     			     		echo "</div>";
+
+
+
+						echo "</div>";
+	
+     			    
+     					}
+
+	         ?>
+                    </div>
+				
+			<?php 
+			include 'walton_footer.php';
+			?>
+
+
+
+	</body>
+</html>
